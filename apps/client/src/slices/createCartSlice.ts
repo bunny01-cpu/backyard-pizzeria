@@ -3,6 +3,7 @@ import { ICartPizza } from '../types';
 
 export interface ICartSlice {
     pizzas: ICartPizza[];
+    cartBounce: boolean;
     addToCart: (pizza: ICartPizza) => void;
     removeFromCart: (id: number) => void;
     changeAmount: (id: number, amount: number) => void;
@@ -11,9 +12,11 @@ export interface ICartSlice {
 
 export const createCartSlice: StateCreator<ICartSlice> = (set, get) => ({
     pizzas: [],
+    cartBounce: false,
     addToCart: (pizza: ICartPizza) => {
         const pizzas = get().pizzas;
-        set({ pizzas: [...pizzas, pizza] });
+        set({ pizzas: [...pizzas, pizza], cartBounce: true });
+        setTimeout(() => set({ cartBounce: false }), 600);
     },
     removeFromCart: (id: number) => {
         const pizzas = get().pizzas;

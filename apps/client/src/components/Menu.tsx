@@ -28,7 +28,7 @@ export const Menu = ({ isDashboard, passUser }: Props) => {
     const [isCartModalShown, setIsCartModalShown] = useState(false);
     const [isAccountModalShown, setIsAccountModalShown] = useState(false);
     const router = useRouter();
-    const { pizzas, user, setUser } = useStore();
+    const { pizzas, user, setUser, cartBounce } = useStore();
 
     const onLogoutButtonClick = async () => {
         const response = await logout();
@@ -89,7 +89,7 @@ export const Menu = ({ isDashboard, passUser }: Props) => {
                 className={twMerge('relative m-2', !isDashboard ? 'block' : 'hidden')}
                 onClick={() => setIsCartModalShown(true)}
             >
-                <RiShoppingCart2Line className="text-white text-3xl cursor-pointer" data-testid="cart-button" />
+                <RiShoppingCart2Line className={`text-white text-3xl cursor-pointer ${cartBounce ? 'cart-bounce' : ''}`} data-testid="cart-button" />
                 <div
                     className={twMerge(
                         'absolute h-5 w-5 text-white font-bold text-xs flex justify-center items-center bg-red rounded-full right-[-10px] bottom-[-10px]',
