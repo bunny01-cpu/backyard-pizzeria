@@ -1,116 +1,70 @@
 'use client';
 
-import { deleteUser, getUsers, updateUserRole } from '@/src/lib/api';
-import { useEffect, useState } from 'react';
-import { RiDeleteBinLine, RiShieldLine, RiUserLine } from 'react-icons/ri';
+import { register } from '@/src/lib/api';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { Button } from '../components/Button';
+import { Error } from '../components/Error';
+import { Input } from '../components/Input';
 import { Title } from '../components/Title';
 import { Toast } from '../components/Toast';
 
-interface IUserRow {
-    id: number;
-    email: string;
-    role: 'user' | 'admin';
-}
-
 export const UsersSection = () => {
-    const [users, setUsers] = useState<IUserRow[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
-    const fetchUsers = async () => {
-        const response = await getUsers();
-        if (response?.status === 'success') {
-            setUsers(response.data.users);
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setError('');
+
+        if (!email || !password) {
+            setError('Email and password are required');
+            return;
         }
+
+        setLoading(true);
+        const response = await register(email, password, 'admin');
         setLoading(false);
-    };
 
-    useEffect(() => {
-        fetchUsers();
-    }, []);
-
-    const handleRoleToggle = async (user: IUserRow) => {
-        const newRole = user.role === 'admin' ? 'user' : 'admin';
-        const response = await updateUserRole(user.id, newRole);
-        toast(<Toast text={response?.message ?? 'Role updated'} />);
-        fetchUsers();
-    };
-
-    const handleDelete = async (user: IUserRow) => {
-        if (!confirm(`Delete user ${user.email}?`)) return;
-        const response = await deleteUser(user.id);
-        toast(<Toast text={response?.message ?? 'User deleted'} />);
-        fetchUsers();
+        if (response?.status === 'success') {
+            setEmail('');
+            setPassword('');
+            toast(<Toast text="Admin account created successfully" />);
+        } else {
+            setError(response?.message ?? 'Something went wrong');
+        }
     };
 
     return (
         <div className="mt-4">
-            <div className="bg-white py-4 px-2 w-full rounded">
-                <Title title="Users" description="Manage user accounts and permissions" />
-
-                {loading ? (
-                    <p className="text-textGray mt-4 text-center">Loading...</p>
-                ) : users.length === 0 ? (
-                    <p className="text-textGray mt-4 text-center">No users found.</p>
-                ) : (
-                    <div className="mt-4 overflow-x-auto">
-                        <table className="w-full text-sm">
-                            <thead>
-                                <tr className="border-b border-gray-100">
-                                    <th className="text-left py-2 px-2 text-textGray font-medium">Email</th>
-                                    <th className="text-center py-2 px-2 text-textGray font-medium">Role</th>
-                                    <th className="text-center py-2 px-2 text-textGray font-medium">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {users.map((user) => (
-                                    <tr key={user.id} className="border-b border-gray-50 hover:bg-backgroundGray transition-colors">
-                                        <td className="py-3 px-2 text-black">{user.email}</td>
-                                        <td className="py-3 px-2 text-center">
-                                            <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold ${
-                                                user.role === 'admin'
-                                                    ? 'bg-yellow-100 text-yellow-800'
-                                                    : 'bg-gray-100 text-gray-600'
-                                            }`}>
-                                                {user.role === 'admin' ? <RiShieldLine /> : <RiUserLine />}
-                                                {user.role}
-                                            </span>
-                                        </td>
-                                        <td className="py-3 px-2">
-                                            <div className="flex items-center justify-center gap-3">
-                                                {/* Toggle role */}
-                                                <button
-                                                    onClick={() => handleRoleToggle(user)}
-                                                    title={user.role === 'admin' ? 'Demote to user' : 'Promote to admin'}
-                                                    className={`flex items-center gap-1 px-3 py-1 rounded text-xs font-medium transition-colors ${
-                                                        user.role === 'admin'
-                                                            ? 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                                                            : 'bg-yellow-100 text-yellow-800 hover:bg-yellow-200'
-                                                    }`}
-                                                >
-                                                    {user.role === 'admin' ? (
-                                                        <><RiUserLine /> Make User</>
-                                                    ) : (
-                                                        <><RiShieldLine /> Make Admin</>
-                                                    )}
-                                                </button>
-
-                                                {/* Delete */}
-                                                <button
-                                                    onClick={() => handleDelete(user)}
-                                                    title="Delete user"
-                                                    className="text-textGray hover:text-red-500 transition-colors"
-                                                >
-                                                    <RiDeleteBinLine className="text-xl" />
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+            <div className="bg-white py-4 px-4 w-full rounded max-w-md">
+                <Title title="Add Admin" description="Create a new admin account." />
+                <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-3">
+                    <div>
+                        <Input
+                            placeholder="Email"
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
                     </div>
-                )}
+                    <div>
+                        <Input
+                            placeholder="Password"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    {error && <Error>{error}</Error>}
+                    <div className="mt-2">
+                        <Button variant="primary" type="submit">
+                            {loading ? 'Creating...' : 'Create Admin'}
+                        </Button>
+                    </div>
+                </form>
             </div>
         </div>
     );

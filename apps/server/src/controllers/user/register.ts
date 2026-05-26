@@ -6,24 +6,23 @@ import { createUser } from '../../services/user';
 export const register: RequestHandler = async (req, res) => {
     const { email, password, role }: RegisterRequestBody = req.body;
 
-    const users = await User.findOne({ role: 'admin' });
+    const adminExists = await User.findOne({ role: 'admin' });
 
-    if (role === 'user' && !users) {
+    if (role === 'user' && !adminExists) {
         return res.status(503).send({ status: 'error', message: 'Setup is not completed' });
     }
 
-    const isEmailTaken = await User.findOne({ email, role });
+    // Only allow creating additional admins if the requester is already an admin
+    if (role === 'admin' && adminExists) {
+        if (!req.session.user || req.session.user.role !== 'admin') {
+            return res.status(403).send({ status: 'error', message: 'Only an existing admin can create another admin' });
+        }
+    }
+
+    const isEmailTaken = await User.findOne({ email });
 
     if (isEmailTaken) {
         return res.status(409).send({ status: 'error', message: 'Account with this e-mail is already registered' });
-    }
-
-    if (role === 'admin') {
-        const users = await User.findOne({ role: 'admin' });
-
-        if (users) {
-            return res.status(409).send({ status: 'error', message: 'Admin account already exists' });
-        }
     }
 
     let user;
@@ -34,7 +33,10 @@ export const register: RequestHandler = async (req, res) => {
         return res.status(500).send({ status: 'error', message: 'Database error' });
     }
 
-    req.session.user = user;
+    // Only set session for the first admin setup — don't overwrite existing admin session
+    if (!adminExists) {
+        req.session.user = user;
+    }
 
     res.status(201).send({ status: 'success', message: 'Account successfully registered', data: { user } });
 };
