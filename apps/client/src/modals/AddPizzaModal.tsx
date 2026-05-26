@@ -49,12 +49,25 @@ export const AddPizzaModal = ({ pizza, onClose }: Props) => {
     return (
         <Modal onClose={onClose} addBackground={true}>
             <Title title="Add pizza to cart" description="Choose pizza size, dough and amount." />
+
+            {/* Pizza image */}
+            {pizza.image && (
+                <div className="mt-4">
+                    <img
+                        src={pizza.image}
+                        alt={pizza.name}
+                        className="w-full h-40 object-cover rounded"
+                    />
+                </div>
+            )}
+
             <div className="mt-4">
-                <div className="bg-backgroundGray p-2">
+                <div className="bg-backgroundGray p-2 rounded">
                     <p className="text-black font-bold text-sm">{pizza.name}</p>
                     <p className="text-textGray">{pizza.ingredients}</p>
                 </div>
             </div>
+
             <div className="mt-4">
                 <p className="text-textGray">Size:</p>
                 <div className="mt-2">
@@ -74,12 +87,12 @@ export const AddPizzaModal = ({ pizza, onClose }: Props) => {
                 </div>
             </div>
             <div className="mt-4">
-                <div className="flex justify-between">
+                <div className="flex justify-between items-center">
                     <Button variant="white" type="button" onClick={onClose}>
                         Close
                     </Button>
                     <Button variant="primary" onClick={onClick}>
-                        Add to cart ({getPrice() * amount} pln)
+                        Add to cart (${getPrice() * amount})
                     </Button>
                 </div>
             </div>

@@ -13,8 +13,8 @@ export const poppins = Poppins({
 
 export const metadata: Metadata = {
     title: {
-        default: 'PizzaPlace',
-        template: 'PizzaPlace - %s',
+        default: 'The Backyard Pizzeria',
+        template: 'The Backyard Pizzeria - %s',
     },
 };
 

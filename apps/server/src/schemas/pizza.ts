@@ -8,6 +8,8 @@ export const createPizzaSchema = z.object({
         medium: z.number(),
         large: z.number(),
     }),
+    category: z.string(),
+    image: z.string().optional(),
 });
 
 export type CreatePizzaRequestBody = z.infer<typeof createPizzaSchema>;
@@ -27,6 +29,8 @@ export const editPizzaSchema = z.object({
         medium: z.number(),
         large: z.number(),
     }),
+    category: z.string(),
+    image: z.string().optional(),
 });
 
 export type EditPizzaRequestBody = z.infer<typeof editPizzaSchema>;

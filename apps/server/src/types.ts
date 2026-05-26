@@ -37,6 +37,8 @@ export interface IPizza {
     name: string;
     ingredients: string;
     prices: IPrices;
+    category: string;
+    image: string;
 }
 
 export interface IUser {

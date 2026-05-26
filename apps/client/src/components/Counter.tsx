@@ -24,7 +24,7 @@ export const Counter = ({ scheme, value, min, max, onChange = () => {} }: Props)
             <button className="w-4" onClick={decrement} aria-label="Decrement value">
                 -
             </button>
-            <p className="w-8 font-medium px-4 flex justify-center">{count}</p>
+            <p className="w-10 font-medium flex justify-center">{count}</p>
             <button className="w-4" onClick={increment} aria-label="Increment value">
                 +
             </button>

@@ -59,6 +59,14 @@ export const Menu = ({ isDashboard, passUser }: Props) => {
             <li
                 className={twMerge(
                     'text-white font-medium m-2 cursor-pointer',
+                    !isDashboard && currentUser && currentUser.role === 'user' ? 'block' : 'hidden'
+                )}
+            >
+                <a href="#my-orders" className="text-white font-medium">My Orders</a>
+            </li>
+            <li
+                className={twMerge(
+                    'text-white font-medium m-2 cursor-pointer',
                     !isDashboard && currentUser ? 'block' : 'hidden'
                 )}
                 onClick={() => setIsAccountModalShown(true)}
@@ -111,7 +119,7 @@ export const Menu = ({ isDashboard, passUser }: Props) => {
                         pizzas.length > 0 ? 'flex' : 'hidden'
                     )}
                 >
-                    {pizzas.length}
+                    {pizzas.reduce((sum, p) => sum + p.amount, 0)}
                 </div>
             </div>
             <div className="m-2 mr-0 md:hidden">

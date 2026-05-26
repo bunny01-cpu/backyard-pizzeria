@@ -7,6 +7,8 @@ export interface IPizza {
         medium: number;
         large: number;
     };
+    category: string;
+    image: string;
 }
 
 export interface IOrderPizza {

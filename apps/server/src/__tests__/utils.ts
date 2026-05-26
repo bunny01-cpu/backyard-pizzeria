@@ -22,8 +22,8 @@ export const createUserAccount = async () => {
 
 export const createPizzas = async () => {
     for (let i = 0; i < 3; i++) {
-        const { name, ingredients, prices } = pizzas[i];
-        await createPizza(name, ingredients, prices);
+        const { name, ingredients, prices, category, image } = pizzas[i];
+        await createPizza(name, ingredients, prices, category, image);
     }
 };
 
@@ -51,31 +51,25 @@ export const pizzas: IPizza[] = [
         id: 1,
         name: 'Margherita',
         ingredients: 'tomato sauce, mozzarella cheese',
-        prices: {
-            small: 32,
-            medium: 42,
-            large: 52,
-        },
+        prices: { small: 32, medium: 42, large: 52 },
+        category: 'special pizza',
+        image: '',
     },
     {
         id: 2,
         name: 'Pepperoni',
         ingredients: 'tomato sauce, mozzarella cheese, pepperoni',
-        prices: {
-            small: 36,
-            medium: 46,
-            large: 56,
-        },
+        prices: { small: 36, medium: 46, large: 56 },
+        category: 'special pizza',
+        image: '',
     },
     {
         id: 3,
         name: 'Hawaiian',
         ingredients: 'tomato sauce, mozzarella cheese, pineapple',
-        prices: {
-            small: 28,
-            medium: 38,
-            large: 48,
-        },
+        prices: { small: 28, medium: 38, large: 48 },
+        category: 'custom pizza',
+        image: '',
     },
 ];
 

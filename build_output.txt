@@ -1,0 +1,71 @@
+
+> pizzaplace@1.0.0 build
+> turbo build
+
+• Packages in scope: client, server
+• Running build in 2 packages
+• Remote caching disabled
+server:build: cache hit, replaying logs 284690ea8f03f999
+server:build: 
+server:build: > server@1.0.0 build
+server:build: > tsc --build
+server:build: 
+client:build: cache hit, replaying logs 17395dcbf1f1d08d
+client:build: 
+client:build: > client@1.0.0 build
+client:build: > next build
+client:build: 
+client:build: - info Loaded env from D:\Production\pizzaplace\apps\client\.env.local
+client:build: Attention: Next.js now collects completely anonymous telemetry regarding usage.
+client:build: This information is used to shape Next.js' roadmap and prioritize features.
+client:build: You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+client:build: https://nextjs.org/telemetry
+client:build: 
+client:build: - info Creating an optimized production build...
+client:build: Browserslist: caniuse-lite is outdated. Please run:
+client:build:   npx update-browserslist-db@latest
+client:build:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+client:build: Browserslist: caniuse-lite is outdated. Please run:
+client:build:   npx browserslist@latest --update-db
+client:build:   Why you should do it regularly: https://github.com/browserslist/browserslist#browsers-data-updating
+client:build: - info Compiled successfully
+client:build: - info Linting and checking validity of types...
+client:build: - error ESLint: Failed to load config "next/babel" to extend from. Referenced from: D:\Production\pizzaplace\apps\client\.eslintrc.json
+client:build: - info Collecting page data...
+client:build: - info Generating static pages (0/9)
+client:build: - info Generating static pages (2/9)
+client:build: - info Generating static pages (4/9)
+client:build: - info Generating static pages (6/9)
+client:build: - info Generating static pages (9/9)
+client:build: - info Finalizing page optimization...
+client:build: 
+client:build: Route (app)                                Size     First Load JS
+client:build: ┌ λ /                                      8.21 kB         132 kB
+client:build: ├ ○ /_not-found                            0 B                0 B
+client:build: ├ λ /dashboard                             2.44 kB         126 kB
+client:build: ├ λ /dashboard/login                       2.33 kB         114 kB
+client:build: ├ λ /dashboard/orders                      2.19 kB         126 kB
+client:build: ├ λ /dashboard/register                    2.33 kB         114 kB
+client:build: └ ○ /favicon.ico                           0 B                0 B
+client:build: + First Load JS shared by all              78.1 kB
+client:build:   ├ chunks/961-1cc9ac8061fe973b.js         25.2 kB
+client:build:   ├ chunks/bce60fc1-54981ff6ad2172e5.js    50.6 kB
+client:build:   ├ chunks/main-app-4f43e1ce6552f6b9.js    215 B
+client:build:   └ chunks/webpack-658ed226e49ff703.js     2.14 kB
+client:build: 
+client:build: Route (pages)                              Size     First Load JS
+client:build: ─ ○ /404                                   181 B            76 kB
+client:build: + First Load JS shared by all              75.8 kB
+client:build:   ├ chunks/framework-0857c1c24dbfb1d6.js   45 kB
+client:build:   ├ chunks/main-68908a9667df9173.js        28.4 kB
+client:build:   ├ chunks/pages/_app-52924524f99094ab.js  195 B
+client:build:   └ chunks/webpack-658ed226e49ff703.js     2.14 kB
+client:build: 
+client:build: λ  (Server)  server-side renders at runtime (uses getInitialProps or getServerSideProps)
+client:build: ○  (Static)  automatically rendered as static HTML (uses no initial props)
+client:build: 
+
+ Tasks:    2 successful, 2 total
+Cached:    2 cached, 2 total
+  Time:    1.468s >>> FULL TURBO
+

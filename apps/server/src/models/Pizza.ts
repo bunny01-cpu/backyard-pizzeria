@@ -6,6 +6,8 @@ export interface IPizza extends Document {
     name: string;
     ingredients: string;
     prices: IPrices;
+    category: string;
+    image: string;
 }
 
 interface IPizzaModel extends Model<IPizza> {}
@@ -19,6 +21,8 @@ const schema = new Schema<IPizza>({
         medium: { type: Number, required: true },
         large: { type: Number, required: true },
     },
+    category: { type: String, required: true, default: 'special pizza' },
+    image: { type: String, required: false, default: '' },
 });
 
 export const Pizza: IPizzaModel = model<IPizza, IPizzaModel>('Pizza', schema);

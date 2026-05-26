@@ -1,0 +1,136 @@
+
+> pizzaplace@1.0.0 test
+> turbo test
+
+• Packages in scope: client, server
+• Running test in 2 packages
+• Remote caching disabled
+client:test: cache miss, executing a943a4d596beba22
+server:test: cache miss, executing 90bb57a0dde41fd0
+client:test: 
+client:test: > client@1.0.0 test
+client:test: > jest
+client:test: 
+server:test: 
+server:test: > server@1.0.0 test
+server:test: > jest
+server:test: 
+client:test: PASS src/components/UserClient.test.tsx (34.355 s)
+client:test: PASS src/sections/OrdersSection.test.tsx (34.642 s)
+client:test: PASS src/modals/AddPizzaModal.test.tsx (34.882 s)
+client:test: PASS src/modals/LoginModal.test.tsx (35.197 s)
+client:test: PASS src/sections/PizzasSection.test.tsx (35.197 s)
+client:test: PASS src/components/Menu.test.tsx (35.538 s)
+client:test: PASS src/modals/EditPizzaModal.test.tsx (35.509 s)
+client:test: PASS src/modals/CreatePizzaModal.test.tsx (35.56 s)
+client:test: PASS src/modals/RegisterModal.test.tsx (35.855 s)
+client:test: PASS src/modals/AccountModal.test.tsx (35.979 s)
+client:test: PASS src/modals/CartModal.test.tsx (36.695 s)
+client:test: PASS src/components/Counter.test.tsx
+client:test: PASS src/components/Table.test.tsx
+client:test: PASS src/modals/ViewOrderModal.test.tsx
+client:test: PASS src/components/Select.test.tsx
+client:test: PASS src/components/Input.test.tsx
+client:test: PASS src/components/Button.test.tsx
+client:test: PASS src/sections/MenuSection.test.tsx
+client:test: PASS src/modals/EditOrderModal.test.tsx
+client:test: PASS src/components/Modal.test.tsx
+client:test: 
+client:test: Test Suites: 20 passed, 20 total
+client:test: Tests:       84 passed, 84 total
+client:test: Snapshots:   0 total
+client:test: Time:        75.155 s
+client:test: Ran all test suites.
+server:test: PASS src/__tests__/pizza.test.ts (73.277 s)
+server:test:   pizza
+server:test:     create pizza route
+server:test:       √ returns 503 if admin account is not registered (667 ms)
+server:test:       √ returns 429 if data is invalid (3305 ms)
+server:test:       √ returns 401 if user is not logged in (596 ms)
+server:test:       √ returns 201 if pizza is successfully created (340 ms)
+server:test:     edit pizza route
+server:test:       √ returns 503 if admin account is not registered (17 ms)
+server:test:       √ returns 429 if data is invalid (313 ms)
+server:test:       √ returns 404 if pizza does not exist (301 ms)
+server:test:       √ returns 401 if user is not logged in (426 ms)
+server:test:       √ returns 200 if pizza is successfully edited (316 ms)
+server:test:     delete pizza route
+server:test:       √ returns 503 if admin account is not registered (14 ms)
+server:test:       √ returns 429 if data is invalid (286 ms)
+server:test:       √ returns 404 if pizza does not exist (303 ms)
+server:test:       √ returns 401 if user is not logged in (424 ms)
+server:test:       √ returns 200 if pizza is successfully deleted (309 ms)
+server:test:     get pizzas route
+server:test:       √ returns 503 if admin account is not registered (14 ms)
+server:test:       √ returns 200 and empty array if there are no pizzas (146 ms)
+server:test:       √ returns 200 and array with pizzas if there are pizzas (159 ms)
+server:test: 
+server:test: PASS src/__tests__/order.test.ts (74.093 s)
+server:test:   order
+server:test:     create order route
+server:test:       √ returns 503 if admin account is not registered (235 ms)
+server:test:       √ returns 429 if data is invalid (3837 ms)
+server:test:       √ returns 401 if user is not logged in (210 ms)
+server:test:       √ returns 404 if pizza does not exist (361 ms)
+server:test:       √ returns 201 if order is successfully created (371 ms)
+server:test:     edit order route
+server:test:       √ returns 503 if admin account is not registered (15 ms)
+server:test:       √ returns 429 if data is invalid (307 ms)
+server:test:       √ returns 404 if order does not exist (297 ms)
+server:test:       √ returns 401 if user is not logged in (147 ms)
+server:test:       √ returns 200 if order is successfully edited (421 ms)
+server:test:     delete order route
+server:test:       √ returns 503 if admin account is not registered (15 ms)
+server:test:       √ returns 429 if data is invalid (287 ms)
+server:test:       √ returns 404 if order does not exist (320 ms)
+server:test:       √ returns 401 if user is not logged in (150 ms)
+server:test:       √ returns 200 if order is successfully deleted (336 ms)
+server:test:     get orders route
+server:test:       √ returns 503 if admin account is not registered (14 ms)
+server:test:       √ returns 401 if user is not logged in (156 ms)
+server:test:       √ returns 200 and empty array if there are no orders (420 ms)
+server:test:       √ returns 200 and array with orders made by user if user role is user (443 ms)
+server:test:       √ returns 200 and array with all orders if user role is admin and type param is equal to all (425 ms)
+server:test: 
+server:test: PASS src/__tests__/user.test.ts (74.471 s)
+server:test:   user
+server:test:     register route
+server:test:       √ returns 503 if admin account is not registered (3812 ms)
+server:test:       √ returns 429 if data is invalid (332 ms)
+server:test:       √ returns 409 if account with that email is already registered (389 ms)
+server:test:       √ returns 201, cookie and user if successfully registered (330 ms)
+server:test:     login route
+server:test:       √ returns 503 if admin account is not registered (21 ms)
+server:test:       √ returns 429 if data is invalid (301 ms)
+server:test:       √ returns 403 if password is wrong (414 ms)
+server:test:       √ returns 201, cookie and user if successfully logged in (410 ms)
+server:test:     logout route
+server:test:       √ returns 503 if admin account is not registered (18 ms)
+server:test:       √ returns 401 if user is not logged in (286 ms)
+server:test:       √ returns 200 and makes session inactive if user is logged in (433 ms)
+server:test:     change password route
+server:test:       √ returns 503 if admin account is not registered (16 ms)
+server:test:       √ returns 429 if data is invalid (437 ms)
+server:test:       √ returns 401 if user is not logged in (146 ms)
+server:test:       √ returns 403 if passwords do not match (560 ms)
+server:test:       √ returns 200 if password is successfully changed (649 ms)
+server:test:     get user route
+server:test:       √ returns 503 if admin account is not registered (13 ms)
+server:test:       √ returns 401 if user is not logged in (134 ms)
+server:test:       √ returns 200 and user data if user is logged in (381 ms)
+server:test:     get setup route
+server:test:       √ returns 503 if admin account is not registered (14 ms)
+server:test:       √ returns 200 if admin account is registered (122 ms)
+server:test: 
+server:test: A worker process has failed to exit gracefully and has been force exited. This is likely caused by tests leaking due to improper teardown. Try running with --detectOpenHandles to find leaks. Active timers can also cause this, ensure that .unref() was called on them.
+server:test: Test Suites: 3 passed, 3 total
+server:test: Tests:       58 passed, 58 total
+server:test: Snapshots:   0 total
+server:test: Time:        80.856 s
+server:test: Ran all test suites.
+server:test: Force exiting Jest: Have you considered using `--detectOpenHandles` to detect async operations that kept running after all tests finished?
+
+ Tasks:    2 successful, 2 total
+Cached:    0 cached, 2 total
+  Time:    1m49.653s 
+

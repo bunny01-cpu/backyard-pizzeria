@@ -52,18 +52,22 @@ export const getUser = (session?: string) => {
 export const createPizza = (
     name: string,
     ingredients: string,
-    prices: { small: number; medium: number; large: number }
+    prices: { small: number; medium: number; large: number },
+    category: string,
+    image: string = ''
 ) => {
-    return fetchApi('api/pizza', 'POST', { name, ingredients, prices });
+    return fetchApi('api/pizza', 'POST', { name, ingredients, prices, category, image });
 };
 
 export const editPizza = (
     id: number,
     name: string,
     ingredients: string,
-    prices: { small: number; medium: number; large: number }
+    prices: { small: number; medium: number; large: number },
+    category: string,
+    image: string = ''
 ) => {
-    return fetchApi('api/pizza', 'PATCH', { id, name, ingredients, prices });
+    return fetchApi('api/pizza', 'PATCH', { id, name, ingredients, prices, category, image });
 };
 
 export const deletePizza = (id: number) => {
