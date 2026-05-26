@@ -17,15 +17,28 @@ declare module 'express-session' {
 export const createApp = (sessionSecret: string, mongoUrl: string, clientUrl: string) => {
     const app = express();
 
-    app.use(cors({ origin: clientUrl, credentials: true }));
+    app.set('trust proxy', 1);
+
+    app.use(cors({
+        origin: clientUrl,
+        credentials: true,
+        methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Accept', 'Cookie'],
+    }));
     app.use(compression());
-    app.use(express.json());
+    app.use(express.json({ limit: '10mb' }));
     app.use(
         session({
             secret: sessionSecret,
             store: MongoStore.create({ mongoUrl: mongoUrl }),
             saveUninitialized: false,
             resave: false,
+            cookie: {
+                httpOnly: true,
+                secure: true,
+                sameSite: 'none',
+                maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+            },
         })
     );
 
