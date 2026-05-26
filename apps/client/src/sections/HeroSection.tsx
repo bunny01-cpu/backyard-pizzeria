@@ -5,22 +5,11 @@ import { Button } from '../components/Button';
 
 export const HeroSection = () => {
     return (
-        <div className="flex justify-between h-[512px] relative overflow-hidden">
+        <div className="flex flex-col md:flex-row md:justify-between md:h-[512px] py-10 md:py-0">
 
-            {/* Pizza image as background on mobile, hidden on desktop */}
-            <div className="absolute inset-0 md:hidden">
-                <Image
-                    src="/hero-image.png"
-                    alt="Pizza"
-                    fill
-                    className="object-cover opacity-20"
-                    priority
-                />
-            </div>
-
-            {/* Content */}
-            <div className="relative z-10 w-full shrink-0 mt-28 flex flex-col items-center md:block md:w-auto">
-                <h2 className="text-5xl text-white text-center font-bold max-w-xs md:text-left">
+            {/* Text content */}
+            <div className="flex flex-col items-center md:items-start md:justify-center md:mt-0">
+                <h2 className="text-4xl md:text-5xl text-white text-center font-bold max-w-xs md:text-left">
                     Fired with love, served with soul.
                 </h2>
                 <p className="text-white text-center font-medium mt-4 md:text-left opacity-90">
@@ -42,9 +31,16 @@ export const HeroSection = () => {
                 </div>
             </div>
 
-            {/* Pizza image on desktop - side by side */}
-            <div className="hidden md:block self-center flex-shrink-0">
-                <Image src="/hero-image.png" alt="Pizza image" width="500" height="300" priority />
+            {/* Pizza image — below text on mobile, side on desktop */}
+            <div className="flex justify-center mt-8 md:mt-0 md:self-center">
+                <Image
+                    src="/hero-image.png"
+                    alt="Pizza image"
+                    width={400}
+                    height={240}
+                    priority
+                    className="w-72 md:w-[500px]"
+                />
             </div>
 
         </div>
