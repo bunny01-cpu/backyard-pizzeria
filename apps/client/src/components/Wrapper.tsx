@@ -12,6 +12,7 @@ const variants = {
     primary: 'bg-primary',
     black: 'bg-black',
     gray: 'bg-backgroundGray',
+    hero: 'bg-white pizza-pattern border-b-4 border-primary',
 } as const;
 
 export const Wrapper = ({ children, variant }: Props) => (

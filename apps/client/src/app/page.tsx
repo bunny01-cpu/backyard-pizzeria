@@ -26,7 +26,9 @@ export default async function Home() {
 
     return (
         <User>
-            <Wrapper variant="primary">
+            {/* Italian flag accent at very top */}
+            <div className="h-1 w-full" style={{ background: 'linear-gradient(to right, #007A33 33%, #ffffff 33%, #ffffff 66%, #C8102E 66%)' }} />
+            <Wrapper variant="hero">
                 <Header isDashboard={false} />
                 <HeroSection />
             </Wrapper>
