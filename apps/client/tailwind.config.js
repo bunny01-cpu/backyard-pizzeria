@@ -14,11 +14,12 @@ module.exports = {
                 sans: ['var(--font-poppins)', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                primary: '#feca57',
-                black: '#2f2f2f',
-                red: '#ff6b6b',
-                textGray: '#afafaf',
-                backgroundGray: '#fafafa',
+                primary: '#C0392B',       // Brick Red
+                black: '#1C1C1C',         // Charcoal Black
+                red: '#A93226',           // Deep Red
+                textGray: '#8B7355',      // Warm Brown-Gray
+                backgroundGray: '#FAF7F2', // Cream White
+                cream: '#F5F0E8',         // Off-White
             },
         },
     },

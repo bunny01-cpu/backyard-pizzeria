@@ -8,10 +8,10 @@ export const HeroSection = () => {
         <div className="flex justify-between h-[512px]">
             <div className="w-full shrink-0 mt-32 flex flex-col items-center md:block md:w-auto">
                 <h2 className="text-5xl text-white text-center font-bold max-w-xs md:text-left">
-                    Best pizzeria in the city!
+                    Fired with love, served with soul.
                 </h2>
-                <p className="text-white text-center font-medium mt-4 md:text-left">
-                    Our pizza is always made with fresh ingredients.
+                <p className="text-white text-center font-medium mt-4 md:text-left opacity-90">
+                    Handcrafted pizzas made with the freshest local ingredients.
                 </p>
                 <div className="mt-4">
                     <Button variant="white" onClick={() => document.querySelector('#menu')?.scrollIntoView()}>
