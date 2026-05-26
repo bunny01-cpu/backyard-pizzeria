@@ -9,6 +9,20 @@
     }
 
     body {
-        @apply text-sm;
+        @apply text-sm bg-white;
     }
+}
+
+/* Italian flag accent line used across the site */
+.italian-accent {
+    background: linear-gradient(to right, #007A33 33%, #ffffff 33%, #ffffff 66%, #C8102E 66%);
+    height: 4px;
+    width: 100%;
+}
+
+/* Red border card style */
+.card-italian {
+    border: 1px solid #e5e5e5;
+    border-top: 3px solid #C8102E;
+    border-radius: 8px;
 }

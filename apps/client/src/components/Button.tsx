@@ -9,9 +9,10 @@ type Props = Readonly<{
     Omit<JSX.IntrinsicElements['button'], 'className'>;
 
 const variants = {
-    white: 'bg-white text-black hover:bg-cream transition-colors',
+    white: 'bg-white text-black hover:bg-gray-100 transition-colors',
     primary: 'bg-primary text-white hover:bg-red transition-colors',
     black: 'bg-black text-white hover:opacity-90 transition-colors',
+    outline: 'bg-transparent text-white border-2 border-white hover:bg-white hover:text-black transition-colors',
 };
 
 export const Button = ({ children, variant, ...props }: Props) => {
