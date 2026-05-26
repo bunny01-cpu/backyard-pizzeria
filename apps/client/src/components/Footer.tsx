@@ -3,10 +3,11 @@
 export const Footer = () => {
     return (
         <div>
-            {/* Italian flag accent */}
             <div className="h-1 w-full" style={{ background: 'linear-gradient(to right, #007A33 33%, #ffffff 33%, #ffffff 66%, #C8102E 66%)' }} />
             <div className="py-6 flex flex-col items-center justify-center gap-1 bg-primary">
-                <img src="/logo.png" alt="The Backyard Pizzeria" className="h-16 w-16 rounded-full object-cover mb-2" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                <div className="h-16 w-16 rounded-full bg-white flex items-center justify-center mb-2 shadow-md">
+                    <span className="text-3xl">🍕</span>
+                </div>
                 <p className="text-white font-bold text-lg">The Backyard Pizzeria</p>
                 <p className="text-white text-sm opacity-90">500 Can-Amera Pkwy Unit E, Cambridge, ON N1T 2H2</p>
                 <p className="text-white text-sm opacity-90">
