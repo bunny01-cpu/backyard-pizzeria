@@ -97,3 +97,16 @@ export const getOrders = () => {
 export const getAllOrders = (session?: string) => {
     return fetchApi('api/orders?type=all', 'GET', undefined, session);
 };
+
+// User management
+export const getUsers = () => {
+    return fetchApi('api/users', 'GET');
+};
+
+export const updateUserRole = (id: number, role: 'user' | 'admin') => {
+    return fetchApi('api/user/role', 'PATCH', { id, role });
+};
+
+export const deleteUser = (id: number) => {
+    return fetchApi(`api/user/${id}`, 'DELETE');
+};

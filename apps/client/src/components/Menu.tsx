@@ -56,6 +56,11 @@ export const Menu = ({ isDashboard, passUser }: Props) => {
                     Orders
                 </Link>
             </li>
+            <li className={twMerge('m-2 cursor-pointer', !isDashboard && 'hidden')}>
+                <Link href="/dashboard/users" className="text-white font-medium" onClick={router.refresh}>
+                    Users
+                </Link>
+            </li>
             <li className={twMerge('text-white font-medium m-2 cursor-pointer', !isDashboard && currentUser && currentUser.role === 'user' ? 'block' : 'hidden')}>
                 <a href="#my-orders" className="text-white font-medium">My Orders</a>
             </li>
