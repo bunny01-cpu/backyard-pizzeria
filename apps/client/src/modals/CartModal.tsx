@@ -1,3 +1,5 @@
+'use client';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -24,11 +26,8 @@ export const CartModal = ({ onClose }: Props) => {
     const { pizzas, changeAmount, removeFromCart, clearCart } = useStore();
 
     const schema = z.object({
-        name: z.string().min(1),
-        phoneNumber: z.string().min(1),
-        street: z.string().min(1),
-        houseNumber: z.string().min(1),
-        city: z.string().min(1),
+        name: z.string().min(1, 'Name is required'),
+        phoneNumber: z.string().min(1, 'Phone number is required'),
     });
 
     const {
@@ -42,15 +41,17 @@ export const CartModal = ({ onClose }: Props) => {
     const onSubmit = handleSubmit(async (data) => {
         const parsedPizzas = pizzas.map((pizza) => ({ ...pizza, totalPrice: pizza.price * pizza.amount }));
 
-        const response = await createOrder(parsedPizzas, data);
+        const response = await createOrder(parsedPizzas, {
+            name: data.name,
+            phoneNumber: data.phoneNumber,
+            street: 'pickup',
+            houseNumber: 'pickup',
+            city: 'pickup',
+        });
 
         if (response?.status === 'success') {
             clearCart();
-
-            if (onClose) {
-                onClose();
-            }
-
+            if (onClose) onClose();
             toast(<Toast text={response.message} />);
         } else {
             setError(response?.message);
@@ -65,8 +66,9 @@ export const CartModal = ({ onClose }: Props) => {
         }
     };
 
-    const styles = ['flex-1', 'w-20 justify-center items-center flex', 'w-20 justify-center items-center flex'];
+    const totalPrice = pizzas.reduce((sum, p) => sum + p.price * p.amount, 0);
 
+    const styles = ['flex-1', 'w-20 justify-center items-center flex', 'w-20 justify-center items-center flex'];
     const head = ['pizza name, ingredients', 'amount', 'price'];
 
     const rows = pizzas.map((pizza, index) => [
@@ -83,67 +85,75 @@ export const CartModal = ({ onClose }: Props) => {
             min={0}
             max={5}
         />,
-        pizza.price * pizza.amount,
+        `$${pizza.price * pizza.amount}`,
     ]);
 
     return (
         <Modal onClose={onClose} addBackground={true}>
-            <Title title="Cart" description="Customize your order." />
-            <div className="mt-4">
-                <Table head={head} rows={rows} styles={styles} />
-            </div>
-            <div className="mt-4">
-                <Title title="Delivery" description="Set your delivery details." />
-            </div>
-            <form onSubmit={onSubmit}>
-                <div className="mt-4">
-                    <div className="flex">
-                        <div className="w-full">
-                            <Input placeholder="Name" {...register('name')} />
-                            {errors.name?.message && <Error>{errors.name.message}</Error>}
-                        </div>
-                        <div className="w-full ml-2">
-                            <Input placeholder="Phone number" {...register('phoneNumber')} />
-                            {errors.phoneNumber?.message && <Error>{errors.phoneNumber.message}</Error>}
-                        </div>
-                    </div>
-                </div>
-                <div className="mt-2">
-                    <div className="flex">
-                        <div className="w-full">
-                            <Input placeholder="Street" {...register('street')} />
-                            {errors.street?.message && <Error>{errors.street.message}</Error>}
-                        </div>
-                        <div className="w-full ml-2">
-                            <Input placeholder="House number" {...register('houseNumber')} />
-                            {errors.houseNumber?.message && <Error>{errors.houseNumber.message}</Error>}
-                        </div>
-                    </div>
-                </div>
-                <div className="mt-2">
-                    <div className="flex">
-                        <div className="w-full">
-                            <Input placeholder="City" {...register('city')} />
-                            {errors.city?.message && (
-                                <p className="text-red text-xs font-medium">{errors.city.message}</p>
-                            )}
-                        </div>
-                    </div>
-                </div>
-                <div className="mt-4">
-                    <div className="flex justify-between">
-                        <Button variant="white" type="button" onClick={onClose}>
-                            Close
-                        </Button>
-                        <Button variant="primary" type="submit">
-                            Order now
+            <Title title="Cart" description="Review your order." />
+
+            {/* Empty cart state */}
+            {pizzas.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-10 text-center">
+                    <div className="text-6xl mb-4">🛒</div>
+                    <p className="text-black font-bold text-lg">Your cart is empty</p>
+                    <p className="text-textGray text-sm mt-1">Add some delicious pizzas to get started!</p>
+                    <div className="mt-6">
+                        <Button variant="primary" type="button" onClick={onClose}>
+                            Browse Menu
                         </Button>
                     </div>
-                    <div className={twMerge('text-right', !error && 'hidden')}>
-                        <Error>{error}</Error>
-                    </div>
                 </div>
-            </form>
+            ) : (
+                <>
+                    <div className="mt-4">
+                        <Table head={head} rows={rows} styles={styles} />
+                    </div>
+
+                    {/* Total */}
+                    <div className="mt-3 flex justify-end">
+                        <p className="text-black font-bold text-base">Total: <span className="text-primary">${totalPrice}</span></p>
+                    </div>
+
+                    {/* Pickup notice */}
+                    <div className="mt-4 bg-backgroundGray rounded-lg p-3 flex items-start gap-3">
+                        <span className="text-2xl">🏪</span>
+                        <div>
+                            <p className="text-black font-semibold text-sm">Pickup Only</p>
+                            <p className="text-textGray text-xs mt-0.5">500 Can-Amera Pkwy Unit E, Cambridge, ON N1T 2H2</p>
+                            <p className="text-textGray text-xs">📞 (519) 621-7774</p>
+                        </div>
+                    </div>
+
+                    {/* Contact details */}
+                    <div className="mt-4">
+                        <Title title="Your Details" description="So we can prepare your order." />
+                    </div>
+                    <form onSubmit={onSubmit}>
+                        <div className="mt-3 flex gap-2">
+                            <div className="w-full">
+                                <Input placeholder="Your name" {...register('name')} />
+                                {errors.name?.message && <Error>{errors.name.message}</Error>}
+                            </div>
+                            <div className="w-full">
+                                <Input placeholder="Phone number" {...register('phoneNumber')} />
+                                {errors.phoneNumber?.message && <Error>{errors.phoneNumber.message}</Error>}
+                            </div>
+                        </div>
+                        <div className="mt-4 flex justify-between">
+                            <Button variant="white" type="button" onClick={onClose}>
+                                Close
+                            </Button>
+                            <Button variant="primary" type="submit">
+                                Place Order
+                            </Button>
+                        </div>
+                        <div className={twMerge('text-right mt-1', !error && 'hidden')}>
+                            <Error>{error}</Error>
+                        </div>
+                    </form>
+                </>
+            )}
         </Modal>
     );
 };

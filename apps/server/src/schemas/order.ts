@@ -23,9 +23,9 @@ export const createOrderSchema = z.object({
     deliveryDetails: z.object({
         name: z.string(),
         phoneNumber: z.string(),
-        street: z.string(),
-        houseNumber: z.string(),
-        city: z.string(),
+        street: z.string().optional().default('pickup'),
+        houseNumber: z.string().optional().default('pickup'),
+        city: z.string().optional().default('pickup'),
     }),
 });
 
