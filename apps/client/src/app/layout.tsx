@@ -1,15 +1,8 @@
 import { Metadata } from 'next';
-import { Poppins } from 'next/font/google';
 import { Slide, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { poppins } from '../lib/fonts';
 import '../styles/globals.css';
-
-export const poppins = Poppins({
-    weight: ['400', '500', '700'],
-    subsets: ['latin'],
-    display: 'swap',
-    variable: '--font-poppins',
-});
 
 export const metadata: Metadata = {
     title: {

@@ -1,7 +1,7 @@
 'use client';
 
 import { twMerge } from 'tailwind-merge';
-import { poppins } from '../app/layout';
+import { poppins } from '../lib/fonts';
 
 type Props = {
     text: string;
