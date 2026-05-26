@@ -14,13 +14,11 @@ module.exports = {
                 sans: ['var(--font-poppins)', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                primary: '#C8102E',        // Italian Red
-                green: '#007A33',          // Italian Green
-                black: '#1C1C1C',          // Charcoal
-                red: '#A50D24',            // Deep Red (hover)
-                textGray: '#6B6B6B',       // Neutral Gray
-                backgroundGray: '#F8F8F8', // Off-White
-                cream: '#FFFFFF',          // White
+                primary: '#feca57',       // Original Yellow
+                black: '#2f2f2f',         // Original Dark
+                red: '#ff6b6b',           // Original Red
+                textGray: '#afafaf',      // Original Gray
+                backgroundGray: '#fafafa', // Original Background
             },
         },
     },

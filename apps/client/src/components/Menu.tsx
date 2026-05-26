@@ -44,9 +44,6 @@ export const Menu = ({ isDashboard, passUser }: Props) => {
 
     const currentUser = user === undefined ? passUser : user;
 
-    const textColor = isDashboard || isOverlayToggled ? 'text-white' : 'text-black';
-    const cartColor = isDashboard ? 'text-white' : 'text-black';
-
     const menuContent = (
         <ul className={twMerge('flex', !isOverlayToggled ? 'items-center' : 'flex-col items-center')} role="list">
             <li className={twMerge('m-2 cursor-pointer', !isDashboard && 'hidden')}>
@@ -59,43 +56,20 @@ export const Menu = ({ isDashboard, passUser }: Props) => {
                     Orders
                 </Link>
             </li>
-            <li
-                className={twMerge(
-                    `${textColor} font-medium m-2 cursor-pointer`,
-                    !isDashboard && currentUser && currentUser.role === 'user' ? 'block' : 'hidden'
-                )}
-            >
-                <a href="#my-orders" className={`${textColor} font-medium`}>My Orders</a>
+            <li className={twMerge('text-white font-medium m-2 cursor-pointer', !isDashboard && currentUser && currentUser.role === 'user' ? 'block' : 'hidden')}>
+                <a href="#my-orders" className="text-white font-medium">My Orders</a>
             </li>
-            <li
-                className={twMerge(
-                    `${textColor} font-medium m-2 cursor-pointer`,
-                    !isDashboard && currentUser ? 'block' : 'hidden'
-                )}
-                onClick={() => setIsAccountModalShown(true)}
-            >
+            <li className={twMerge('text-white font-medium m-2 cursor-pointer', !isDashboard && currentUser ? 'block' : 'hidden')} onClick={() => setIsAccountModalShown(true)}>
                 Profile
             </li>
-            <li
-                className={twMerge(`${textColor} font-medium m-2 cursor-pointer`, currentUser ? 'block' : 'hidden')}
-                onClick={onLogoutButtonClick}
-            >
+            <li className={twMerge('text-white font-medium m-2 cursor-pointer', currentUser ? 'block' : 'hidden')} onClick={onLogoutButtonClick}>
                 Logout
             </li>
-            <li
-                className={twMerge(
-                    `${textColor} font-medium m-2 cursor-pointer`,
-                    !isDashboard && !currentUser ? 'block' : 'hidden'
-                )}
-                onClick={() => setIsLoginModalShown(true)}
-            >
+            <li className={twMerge('text-white font-medium m-2 cursor-pointer', !isDashboard && !currentUser ? 'block' : 'hidden')} onClick={() => setIsLoginModalShown(true)}>
                 Login
             </li>
-            <li
-                className={twMerge('ml-2', !isDashboard && !currentUser ? 'block' : 'hidden')}
-                onClick={() => setIsRegisterModalShown(true)}
-            >
-                <Button variant={isDashboard ? 'white' : 'primary'}>Register</Button>
+            <li className={twMerge('ml-2', !isDashboard && !currentUser ? 'block' : 'hidden')} onClick={() => setIsRegisterModalShown(true)}>
+                <Button variant="white">Register</Button>
             </li>
         </ul>
     );
@@ -115,10 +89,10 @@ export const Menu = ({ isDashboard, passUser }: Props) => {
                 className={twMerge('relative m-2', !isDashboard ? 'block' : 'hidden')}
                 onClick={() => setIsCartModalShown(true)}
             >
-                <RiShoppingCart2Line className={twMerge('text-3xl cursor-pointer', isDashboard ? 'text-white' : 'text-black')} data-testid="cart-button" />
+                <RiShoppingCart2Line className="text-white text-3xl cursor-pointer" data-testid="cart-button" />
                 <div
                     className={twMerge(
-                        'absolute h-5 w-5 text-white font-bold text-xs flex justify-center items-center bg-primary rounded-full right-[-10px] bottom-[-10px]',
+                        'absolute h-5 w-5 text-white font-bold text-xs flex justify-center items-center bg-red rounded-full right-[-10px] bottom-[-10px]',
                         pizzas.length > 0 ? 'flex' : 'hidden'
                     )}
                 >
@@ -127,7 +101,7 @@ export const Menu = ({ isDashboard, passUser }: Props) => {
             </div>
             <div className="m-2 mr-0 md:hidden">
                 <RiMenuLine
-                    className={twMerge('text-3xl cursor-pointer', isDashboard ? 'text-white' : 'text-black')}
+                    className="text-white text-3xl cursor-pointer"
                     onClick={() => setIsOverlayToggled(true)}
                     data-testid="overlay-open-button"
                 />
