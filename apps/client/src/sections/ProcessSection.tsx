@@ -11,9 +11,9 @@ export const ProcessSection = () => {
         },
         {
             name: 'Wait',
-            description: 'Wait while we prepare and deliver',
-            image: '/delivery-truck.svg',
-            imageAlt: 'Delivery truck',
+            description: 'Wait while we prepare your order',
+            image: '/order-confirmed.svg',
+            imageAlt: 'Preparing order',
         },
         {
             name: 'Collect',
@@ -36,9 +36,15 @@ export const ProcessSection = () => {
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {processes.map(({ name, description, image, imageAlt }) => (
                         <div key={name} className="bg-backgroundGray rounded p-2 flex flex-col items-center">
-                            <div className="relative w-full h-[96px]">
-                                <Image src={image} fill alt={imageAlt} />
-                            </div>
+                            {name === 'Wait' ? (
+                                <div className="w-full h-[96px] flex items-center justify-center">
+                                    <span className="text-6xl">👨‍🍳</span>
+                                </div>
+                            ) : (
+                                <div className="relative w-full h-[96px]">
+                                    <Image src={image} fill alt={imageAlt} />
+                                </div>
+                            )}
                             <div className="mt-4">
                                 <p className="text-textGray text-center">
                                     <span className="text-black font-bold text-sm">{name}</span>
